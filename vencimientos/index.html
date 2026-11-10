@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control de vencimientos para droguerías</title>
+<meta name="description" content="Sube el inventario de tu droguería y descubre en segundos qué productos están vencidos o por vencer, y cuánto dinero tienes en riesgo. Gratis y sin enviar datos a ningún servidor.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Para droguerías y farmacias en Colombia</p>
+    <h1>Deja de perder plata por productos vencidos</h1>
+    <p class="lead">Sube el inventario de tu sistema (Excel o CSV) y en segundos ves qué está vencido, qué vence en 30, 60 y 90 días y cuánto dinero tienes en riesgo. Todo pasa en tu navegador: ningún dato sale de tu computador.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#herramienta">Probar gratis ahora</a>
+      <a class="btn" href="#planes">Ver plan automático</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="herramienta" class="card">
+    <h2>Herramienta gratuita</h2>
+    <p>Exporta el inventario desde tu sistema de punto de venta con estas columnas (el orden y los nombres pueden variar, la herramienta los detecta): <strong>producto</strong>, <strong>lote</strong>, <strong>fecha de vencimiento</strong>, <strong>cantidad</strong> y <strong>costo unitario</strong>.</p>
+    <div class="controls">
+      <label class="file">
+        <input type="file" id="archivo" accept=".csv,.txt,.xlsx,.xls">
+        <span>Elegir archivo CSV o Excel</span>
+      </label>
+      <button class="btn" id="demo" type="button">Cargar datos de ejemplo</button>
+      <label class="inline">Fecha de referencia <input type="date" id="hoy"></label>
+    </div>
+    <p id="estado" class="muted"></p>
+
+    <div id="resultados" hidden>
+      <div class="kpis">
+        <div class="kpi danger"><span class="num" id="k-vencidos">0</span><span class="lbl">Vencidos</span></div>
+        <div class="kpi warn"><span class="num" id="k-30">0</span><span class="lbl">Vencen en 30 días</span></div>
+        <div class="kpi"><span class="num" id="k-60">0</span><span class="lbl">Vencen en 31–60 días</span></div>
+        <div class="kpi"><span class="num" id="k-90">0</span><span class="lbl">Vencen en 61–90 días</span></div>
+        <div class="kpi money"><span class="num" id="k-riesgo">$0</span><span class="lbl">Dinero en riesgo (≤ 90 días)</span></div>
+      </div>
+
+      <div class="toolbar">
+        <label>Mostrar
+          <select id="filtro">
+            <option value="90">Vencidos y próximos 90 días</option>
+            <option value="30">Vencidos y próximos 30 días</option>
+            <option value="0">Solo vencidos</option>
+            <option value="all">Todo el inventario</option>
+          </select>
+        </label>
+        <input type="search" id="buscar" placeholder="Buscar producto o lote">
+        <button class="btn" id="exportar" type="button">Descargar lista (CSV)</button>
+        <button class="btn" id="imprimir" type="button">Imprimir</button>
+      </div>
+
+      <div class="tabla-wrap">
+        <table id="tabla">
+          <thead>
+            <tr><th>Producto</th><th>Lote</th><th>Vence</th><th>Días</th><th>Cant.</th><th>Costo unit.</th><th>Valor</th><th>Acción sugerida</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="muted" id="omitidos"></p>
+    </div>
+  </section>
+
+  <section id="planes" class="card">
+    <h2>Plan automático: el informe llega solo, todos los días</h2>
+    <p>La herramienta gratuita sirve cuando te acuerdas de usarla. El plan automático se conecta directamente a la base de datos de tu sistema de punto de venta (SQL Server y otros) y te envía cada mañana por correo o WhatsApp la lista de lo que vence, para que puedas rotar, devolver al proveedor o promocionar a tiempo.</p>
+    <div class="planes">
+      <div class="plan">
+        <h3>Gratis</h3>
+        <p class="precio">$0</p>
+        <ul>
+          <li>Esta herramienta en línea</li>
+          <li>Subes el archivo cuando quieras</li>
+          <li>Sin registro, sin enviar datos</li>
+        </ul>
+      </div>
+      <div class="plan destacado">
+        <h3>Automático</h3>
+        <p class="precio">Desde $120.000 COP/mes</p>
+        <ul>
+          <li>Conexión a tu sistema de punto de venta</li>
+          <li>Informe diario por correo o WhatsApp</li>
+          <li>Alerta de vencidos, por vencer y dinero en riesgo</li>
+          <li>Instalación incluida, cancelas cuando quieras</li>
+        </ul>
+        <a class="btn primary" id="contacto" href="https://wa.me/57XXXXXXXXXX?text=Hola%2C%20quiero%20el%20plan%20autom%C3%A1tico%20de%20control%20de%20vencimientos">Escribir por WhatsApp</a>
+      </div>
+    </div>
+    <p class="muted">Un solo producto vencido de $120.000 ya paga el mes completo.</p>
+  </section>
+
+  <section class="card">
+    <h2>Preguntas frecuentes</h2>
+    <details><summary>¿Mis datos se suben a algún lado?</summary><p>No. La herramienta gratuita funciona por completo en tu navegador. Puedes desconectar el internet después de abrir la página y sigue funcionando.</p></details>
+    <details><summary>¿Qué formato debe tener el archivo?</summary><p>CSV o Excel con una fila por lote. Las columnas se detectan por nombre: producto/nombre/descripción, lote, vencimiento/vence/fecha, cantidad/existencia/stock, costo/precio. Las fechas pueden venir como 31/12/2026, 2026-12-31 o 12/2026.</p></details>
+    <details><summary>¿Con qué sistemas funciona el plan automático?</summary><p>Con cualquiera que guarde los datos en SQL Server, MySQL, PostgreSQL o archivos exportables. Primero reviso tu sistema sin costo y te digo si se puede conectar.</p></details>
+  </section>
+</main>
+
+<footer class="wrap muted">
+  <p>Hecho en Colombia por <a href="https://github.com/davidhc4">David</a>. Código abierto.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

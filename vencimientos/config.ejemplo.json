@@ -1,0 +1,13 @@
+{
+  "conexion": "DRIVER={ODBC Driver 17 for SQL Server};SERVER=localhost\\SQLEXPRESS;DATABASE=Farmacia;UID=lector;PWD=cambiar",
+  "consulta": "SELECT p.Nombre, l.Lote, l.FechaVencimiento, l.Existencia, p.CostoUnitario FROM Lotes l JOIN Productos p ON p.Id = l.ProductoId WHERE l.Existencia > 0",
+  "horizonte_dias": 90,
+  "carpeta_salida": "informes",
+  "correo": {
+    "servidor": "smtp.gmail.com",
+    "puerto": 587,
+    "usuario": "tu-correo@gmail.com",
+    "clave": "clave-de-aplicacion-de-16-letras",
+    "para": ["dueno@drogueria.com"]
+  }
+}

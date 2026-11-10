@@ -18,6 +18,9 @@ App de control de gastos personal para Android, hecha con Flutter. Gratis, de c�
 ### [Música](https://github.com/davidhc4/app-musica)
 Reproductor de música para Android en Kotlin, con Jetpack Compose y Media3. Está pensado para funcionar sin conexión y sin anuncios. Los componentes se hablan por medio de un mediador central, así que si uno falla no tumba a los demás. Todavía está en construcción.
 
+### [Control de vencimientos para droguerías](vencimientos/)
+Herramienta web gratuita para que una droguería suba su inventario y vea en segundos qué está vencido, qué vence en 30/60/90 días y cuánto dinero tiene en riesgo. Todo corre en el navegador. Incluye el script en Python que se conecta al sistema de punto de venta y envía el informe por correo cada mañana.
+
 ## Herramientas que uso
 
 Python · SQL Server · Playwright · Kotlin · Flutter · Git y GitHub

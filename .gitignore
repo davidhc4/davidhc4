@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+vencimientos/config.json
+vencimientos/informes/
